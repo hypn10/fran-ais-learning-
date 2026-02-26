@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PolyGlot 法语学习笔记 | Carnet d'apprentissage</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'serif': ['Playfair Display', 'serif'],
+                        'sans': ['Inter', 'Noto Sans SC', 'sans-serif'],
+                    },
+                    colors: {
+                        'french-blue': '#0055A4',
+                        'french-red': '#EF4135',
+                        'french-gold': '#C5B358',
+                        'parchment': '#F9F7F2',
+                        'ink': '#2C3E50'
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'fade-in': 'fadeIn 0.5s ease-out',
+                        'slide-up': 'slideUp 0.4s ease-out',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #F9F7F2 0%, #E8E6E1 100%);
+            min-height: 100vh;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+        }
+        .note-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .note-card:hover {
+            transform: translateY(-4px) rotate(1deg);
+            box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.1);
+        }
+        .language-btn.active {
+            background: linear-gradient(135deg, #0055A4 0%, #003d7a 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 85, 164, 0.3);
+        }
+        .tab-active {
+            border-bottom: 3px solid #0055A4;
+            color: #0055A4;
+            font-weight: 600;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background-color: rgba(0, 85, 164, 0.3);
+            border-radius: 20px;
+        }
+        .highlight {
+            background: linear-gradient(120deg, rgba(197, 179, 88, 0.3) 0%, rgba(197, 179, 88, 0.3) 100%);
+            padding: 2px 4px;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .highlight:hover {
+            background: linear-gradient(120deg, rgba(197, 179, 88, 0.6) 0%, rgba(197, 179, 88, 0.6) 100%);
+        }
+        .morphing-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.4;
+        }
+        .blob {
+            position: absolute;
+            filter: blur(80px);
+            opacity: 0.6;
+            animation: morph 20s ease-in-out infinite;
+        }
+        @keyframes morph {
+            0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+            50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+        }
+    </style>
+</head>
+<body class="font-sans text-ink overflow-x-hidden">
+
+    <!-- Animated Background -->
+    <div class="morphing-bg">
+        <div class="blob bg-blue-200 w-96 h-96 top-0 left-0 animate-float"></div>
+        <div class="blob bg-red-200 w-80 h-80 bottom-0 right-0 animate-float" style="animation-delay: -3s;"></div>
+        <div class="blob bg-yellow-100 w-72 h-72 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 animate-float" style="animation-delay: -6s;"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="glass-panel sticky top-0 z-50 px-6 py-4 mb-8">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="w-12 h-12 rounded-full bg-gradient-to-br from-french-blue to-french-red flex items-center justify-center text-white font-serif text-2xl font-bold shadow-lg">
+                    P
+                </div>
+                <div>
+                    <h1 class="text-2xl font-serif font-bold text-gray-800 tracking-tight">PolyGlot</h1>
+                    <p class="text-xs text-gray-500 font-medium tracking-widest uppercase">French Learning Studio</p>
+                </div>
+            </div>
+
+            <!-- Language Switcher -->
+            <div class="flex space-x-2 bg-white/50 p-1 rounded-full backdrop-blur-sm">
+                <button onclick="switchLanguage('zh')" id="btn-zh" class="language-btn active px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-300">
+                    中文
+                </button>
+                <button onclick="switchLanguage('en')" id="btn-en" class="language-btn px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-300 text-gray-600 hover:text-gray-900">
+                    English
+                </button>
+                <button onclick="switchLanguage('fr')" id="btn-fr" class="language-btn px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-300 text-gray-600 hover:text-gray-900">
+                    Français
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-6 pb-12 grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        <!-- Left Sidebar: Navigation & Stats -->
+        <aside class="lg:col-span-3 space-y-6">
+            <!-- Quick Stats -->
+            <div class="glass-panel rounded-2xl p-6 animate-fade-in">
+                <h3 class="text-lg font-serif font-bold mb-4 flex items-center" data-i18n="stats_title">
+                    <i class="fas fa-chart-line mr-2 text-french-blue"></i> 学习统计
+                </h3>
+                <div class="space-y-4">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm text-gray-600" data-i18n="notes_count">笔记数量</span>
+                        <span class="text-2xl font-bold text-french-blue" id="total-notes">0</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div class="bg-gradient-to-r from-french-blue to-french-red h-2 rounded-full transition-all duration-1000" style="width: 65%"></div>
+                    </div>
+                    <div class="flex justify-between text-xs text-gray-500">
+                        <span data-i18n="vocabulary">词汇量</span>
+                        <span>1,247 mots</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Categories -->
+            <div class="glass-panel rounded-2xl p-6 animate-fade-in" style="animation-delay: 0.1s">
+                <h3 class="text-lg font-serif font-bold mb-4" data-i18n="categories">分类</h3>
+                <nav class="space-y-2">
+                    <button onclick="filterCategory('all')" class="w-full text-left px-4 py-3 rounded-xl bg-french-blue/10 text-french-blue font-medium transition-all hover:bg-french-blue/20 flex items-center justify-between group">
+                        <span><i class="fas fa-layer-group mr-2"></i> <span data-i18n="all_notes">全部笔记</span></span>
+                        <span class="bg-white/50 px-2 py-0.5 rounded-full text-xs" id="count-all">0</span>
+                    </button>
+                    <button onclick="filterCategory('grammar')" class="w-full text-left px-4 py-3 rounded-xl hover:bg-gray-100 transition-all flex items-center justify-between group text-gray-600">
+                        <span><i class="fas fa-book mr-2"></i> <span data-i18n="grammar">语法</span></span>
+                        <span class="bg-gray-100 px-2 py-0.5 rounded-full text-xs" id="count-grammar">0</span>
+                    </button>
+                    <button onclick="filterCategory('vocabulary')" class="w-full text-left px-4 py-3 rounded-xl hover:bg-gray-100 transition-all flex items-center justify-between group text-gray-600">
+                        <span><i class="fas fa-language mr-2"></i> <span data-i18n="vocabulary_cat">词汇</span></span>
+                        <span class="bg-gray-100 px-2 py-0.5 rounded-full text-xs" id="count-vocabulary">0</span>
+                    </button>
+                    <button onclick="filterCategory('culture')" class="w-full text-left px-4 py-3 rounded-xl hover:bg-gray-100 transition-all flex items-center justify-between group text-gray-600">
+                        <span><i class="fas fa-wine-glass mr-2"></i> <span data-i18n="culture">文化</span></span>
+                        <span class="bg-gray-100 px-2 py-0.5 rounded-full text-xs" id="count-culture">0</span>
+                    </button>
+                </nav>
+            </div>
+
+            <!-- Export/Import -->
+            <div class="glass-panel rounded-2xl p-6 animate-fade-in" style="animation-delay: 0.2s">
+                <h3 class="text-lg font-serif font-bold mb-4" data-i18n="data_management">数据管理</h3>
+                <div class="space-y-2">
+                    <button onclick="exportData()" class="w-full py-2 px-4 rounded-lg border border-french-blue text-french-blue hover:bg-french-blue hover:text-white transition-all text-sm font-medium">
+                        <i class="fas fa-download mr-2"></i> <span data-i18n="export">导出存档</span>
+                    </button>
+                    <label class="w-full py-2 px-4 rounded-lg border border-gray-300 text-gray-600 hover:bg-gray-50 transition-all text-sm font-medium cursor-pointer block text-center">
+                        <i class="fas fa-upload mr-2"></i> <span data-i18n="import">导入数据</span>
+                        <input type="file" id="import-file" class="hidden" accept=".json" onchange="importData(this)">
+                    </label>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <section class="lg:col-span-9 space-y-6">
+            
+            <!-- Input Area -->
+            <div class="glass-panel rounded-2xl p-8 animate-slide-up shadow-xl">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-2xl font-serif font-bold text-gray-800" data-i18n="new_note">新建学习笔记</h2>
+                    <div class="flex space-x-2">
+                        <select id="note-category" class="px-4 py-2 rounded-lg border border-gray-200 bg-white/50 text-sm focus:outline-none focus:ring-2 focus:ring-french-blue">
+                            <option value="grammar" data-i18n="grammar">语法</option>
+                            <option value="vocabulary" data-i18n="vocabulary_cat">词汇</option>
+                            <option value="culture" data-i18n="culture">文化</option>
+                            <option value="expression" data-i18n="expression">表达</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-600 mb-2" data-i18n="french_content">法语内容</label>
+                            <textarea id="input-french" rows="3" class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white/80 focus:bg-white focus:ring-2 focus:ring-french-blue focus:border-transparent transition-all resize-none font-serif text-lg" placeholder="Entrez votre texte en français..."></textarea>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-600 mb-2" data-i18n="translation">翻译 / Translation</label>
+                            <textarea id="input-translation" rows="3" class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white/80 focus:bg-white focus:ring-2 focus:ring-french-blue focus:border-transparent transition-all resize-none" placeholder="中文或英文翻译..."></textarea>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-600 mb-2" data-i18n="notes_context">语境 / 注释</label>
+                        <textarea id="input-context" rows="2" class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white/80 focus:bg-white focus:ring-2 focus:ring-french-blue focus:border-transparent transition-all resize-none" placeholder="添加使用场景、语法说明或文化背景..."></textarea>
+                    </div>
+
+                    <div class="flex justify-between items-center pt-2">
+                        <div class="flex space-x-2">
+                            <button onclick="addTag()" class="px-3 py-1.5 rounded-lg bg-gray-100 text-gray-600 text-sm hover:bg-gray-200 transition-colors">
+                                <i class="fas fa-tag mr-1"></i> <span data-i18n="add_tag">添加标签</span>
+                            </button>
+                            <div id="tags-container" class="flex space-x-2"></div>
+                        </div>
+                        <button onclick="saveNote()" class="px-8 py-3 bg-gradient-to-r from-french-blue to-blue-600 text-white rounded-xl font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all flex items-center">
+                            <i class="fas fa-save mr-2"></i> <span data-i18n="save">保存笔记</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabs -->
+            <div class="flex space-x-8 border-b border-gray-200 px-2">
+                <button onclick="switchTab('library')" id="tab-library" class="tab-active pb-3 text-sm font-medium transition-colors" data-i18n="library">资料库</button>
+                <button onclick="switchTab('review')" id="tab-review" class="pb-3 text-sm font-medium text-gray-500 hover:text-gray-700 transition-colors" data-i18n="review_mode">提问复习</button>
+                <button onclick="switchTab('extension')" id="tab-extension" class="pb-3 text-sm font-medium text-gray-500 hover:text-gray-700 transition-colors" data-i18n="extensions">延伸学习</button>
+            </div>
+
+            <!-- Content Views -->
+            <div id="view-library" class="space-y-4">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-serif font-bold" data-i18n="recent_notes">最近笔记</h3>
+                    <div class="relative">
+                        <input type="text" id="search-input" onkeyup="searchNotes()" class="pl-10 pr-4 py-2 rounded-full border border-gray-200 bg-white/50 focus:bg-white focus:ring-2 focus:ring-french-blue text-sm w-64 transition-all" placeholder="Rechercher...">
+                        <i class="fas fa-search absolute left-3 top-2.5 text-gray-400"></i>
+                    </div>
+                </div>
+                
+                <div id="notes-container" class="grid grid-cols-1 md:grid-cols-2 gap-4 max-h-[600px] overflow-y-auto custom-scrollbar pr-2">
+                    <!-- Notes will be injected here -->
+                </div>
+            </div>
+
+            <!-- Review Mode -->
+            <div id="view-review" class="hidden space-y-6">
+                <div class="glass-panel rounded-2xl p-8 text-center min-h-[400px] flex flex-col justify-center items-center">
+                    <div id="quiz-container" class="w-full max-w-2xl">
+                        <div class="mb-8">
+                            <span class="inline-block px-4 py-1 rounded-full bg-french-blue/10 text-french-blue text-sm font-medium mb-4" data-i18n="question_mode">提问模式</span>
+                            <h3 class="text-2xl font-serif font-bold mb-2" id="quiz-question" data-i18n="start_quiz">准备好挑战了吗？</h3>
+                            <p class="text-gray-600" id="quiz-hint" data-i18n="quiz_hint">系统将基于你的笔记生成问题</p>
+                        </div>
+                        
+                        <div id="quiz-options" class="space-y-3 hidden">
+                            <!-- Options injected here -->
+                        </div>
+
+                        <div id="quiz-input-area" class="hidden space-y-4">
+                            <input type="text" id="quiz-answer-input" class="w-full px-6 py-4 text-center text-xl border-2 border-gray-200 rounded-xl focus:border-french-blue focus:ring-0 font-serif" placeholder="Votre réponse...">
+                            <button onclick="checkAnswer()" class="w-full py-3 bg-french-blue text-white rounded-xl font-medium hover:bg-blue-700 transition-colors" data-i18n="confirm">确认</button>
+                        </div>
+
+                        <button onclick="startQuiz()" id="start-quiz-btn" class="px-8 py-4 bg-gradient-to-r from-french-red to-red-600 text-white rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all">
+                            <i class="fas fa-play mr-2"></i> <span data-i18n="start">开始挑战</span>
+                        </button>
+
+                        <div id="quiz-result" class="hidden mt-6 p-6 rounded-xl bg-green-50 border border-green-200 animate-fade-in">
+                            <i class="fas fa-check-circle text-4xl text-green-500 mb-2"></i>
+                            <p class="text-lg font-medium text-green-800" data-i18n="correct">正确！</p>
+                            <p class="text-green-600 mt-2" id="quiz-explanation"></p>
+                            <button onclick="nextQuestion()" class="mt-4 px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors" data-i18n="next">下一题</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Extensions View -->
+            <div id="view-extension" class="hidden space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="glass-panel rounded-2xl p-6 hover:shadow-lg transition-all cursor-pointer group" onclick="loadExtension('conjugation')">
+                        <div class="w-12 h-12 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-random text-xl"></i>
+                        </div>
+                        <h4 class="font-bold text-lg mb-2" data-i18n="verb_conj">动词变位</h4>
+                        <p class="text-sm text-gray-600" data-i18n="conj_desc">练习常用动词的不同时态变位</p>
+                    </div>
+                    
+                    <div class="glass-panel rounded-2xl p-6 hover:shadow-lg transition-all cursor-pointer group" onclick="loadExtension('phrases')">
+                        <div class="w-12 h-12 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-comments text-xl"></i>
+                        </div>
+                        <h4 class="font-bold text-lg mb-2" data-i18n="daily_phrases">日常用语</h4>
+                        <p class="text-sm text-gray-600" data-i18n="phrases_desc">高频场景对话与表达</p>
+                    </div>
+
+                    <div class="glass-panel rounded-2xl p-6 hover:shadow-lg transition-all cursor-pointer group" onclick="loadExtension('phonetics')">
+                        <div class="w-12 h-12 rounded-full bg-teal-100 text-teal-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-microphone text-xl"></i>
+                        </div>
+                        <h4 class="font-bold text-lg mb-2" data-i18n="phonetics">语音练习</h4>
+                        <p class="text-sm text-gray-600" data-i18n="phonetics_desc">鼻化元音与连诵规则</p>
+                    </div>
+                </div>
+
+                <div id="extension-content" class="glass-panel rounded-2xl p-8 min-h-[300px]">
+                    <div class="text-center text-gray-400 py-12">
+                        <i class="fas fa-hand-pointer text-4xl mb-4 opacity-50"></i>
+                        <p data-i18n="select_extension">选择一个模块开始学习</p>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <!-- Detail Modal -->
+    <div id="detail-modal" class="fixed inset-0 z-[60] hidden">
+        <div class="absolute inset-0 bg-black/40 backdrop-blur-sm" onclick="closeModal()"></div>
+        <div class="absolute inset-0 flex items-center justify-center p-4 pointer-events-none">
+            <div class="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[80vh] overflow-y-auto pointer-events-auto animate-slide-up">
+                <div class="p-8">
+                    <div class="flex justify-between items-start mb-6">
+                        <div>
+                            <span id="modal-category" class="px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 mb-2 inline-block">Category</span>
+                            <h2 id="modal-french" class="text-3xl font-serif font-bold text-gray-800 mb-2"></h2>
+                            <p id="modal-translation" class="text-lg text-gray-600 italic"></p>
+                        </div>
+                        <button onclick="closeModal()" class="text-gray-400 hover:text-gray-600 transition-colors">
+                            <i class="fas fa-times text-2xl"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="prose max-w-none mb-6">
+                        <h4 class="font-bold text-gray-800 mb-2 flex items-center">
+                            <i class="fas fa-align-left mr-2 text-french-blue"></i> 
+                            <span data-i18n="context">语境说明</span>
+                        </h4>
+                        <p id="modal-context" class="text-gray-600 leading-relaxed bg-gray-50 p-4 rounded-xl"></p>
+                    </div>
+
+                    <div class="border-t pt-6">
+                        <h4 class="font-bold text-gray-800 mb-4 flex items-center">
+                            <i class="fas fa-lightbulb mr-2 text-french-gold"></i>
+                            <span data-i18n="ai_extensions">AI 延伸学习</span>
+                        </h4>
+                        <div id="modal-extensions" class="space-y-3">
+                            <!-- Dynamic extensions -->
+                        </div>
+                    </div>
+
+                    <div class="flex justify-end space-x-3 mt-8 pt-4 border-t">
+                        <button onclick="deleteCurrentNote()" class="px-4 py-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors" data-i18n="delete">删除</button>
+                        <button onclick="closeModal()" class="px-6 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors" data-i18n="close">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Data Store
+        let notes = JSON.parse(localStorage.getItem('frenchNotes')) || [];
+        let currentLanguage = 'zh';
+        let currentCategory = 'all';
+        let currentNoteId = null;
+        let currentQuiz = null;
+
+        // Translations
+        const i18n = {
+            zh: {
+                stats_title: '学习统计',
+                notes_count: '笔记数量',
+                vocabulary: '词汇量',
+                categories: '分类',
+                all_notes: '全部笔记',
+                grammar: '语法',
+                vocabulary_cat: '词汇',
+                culture: '文化',
+                expression: '表达',
+                data_management: '数据管理',
+                export: '导出存档',
+                import: '导入数据',
+                new_note: '新建学习笔记',
+                french_content: '法语内容',
+                translation: '翻译 / Translation',
+                notes_context: '语境 / 注释',
+                add_tag: '添加标签',
+                save: '保存笔记',
+                library: '资料库',
+                review_mode: '提问复习',
+                extensions: '延伸学习',
+                recent_notes: '最近笔记',
+                question_mode: '提问模式',
+                start_quiz: '准备好挑战了吗？',
+                quiz_hint: '系统将基于你的笔记生成问题',
+                start: '开始挑战',
+                confirm: '确认',
+                correct: '正确！',
+                next: '下一题',
+                verb_conj: '动词变位',
+                conj_desc: '练习常用动词的不同时态变位',
+                daily_phrases: '日常用语',
+                phrases_desc: '高频场景对话与表达',
+                phonetics: '语音练习',
+                phonetics_desc: '鼻化元音与连诵规则',
+                select_extension: '选择一个模块开始学习',
+                context: '语境说明',
+                ai_extensions: 'AI 延伸学习',
+                delete: '删除',
+                close: '关闭',
+                example: '例句',
+                synonym: '同义词',
+                antonym: '反义词',
+                usage: '用法提示'
+            },
+            en: {
+                stats_title: 'Statistics',
+                notes_count: 'Notes',
+                vocabulary: 'Vocabulary',
+                categories: 'Categories',
+                all_notes: 'All Notes',
+                grammar: 'Grammar',
+                vocabulary_cat: 'Vocabulary',
+                culture: 'Culture',
+                expression: 'Expressions',
+                data_management: 'Data',
+                export: 'Export',
+                import: 'Import',
+                new_note: 'New Note',
+                french_content: 'French Content',
+                translation: 'Translation',
+                notes_context: 'Context / Notes',
+                add_tag: 'Add Tag',
+                save: 'Save Note',
+                library: 'Library',
+                review_mode: 'Review',
+                extensions: 'Extensions',
+                recent_notes: 'Recent Notes',
+                question_mode: 'Quiz Mode',
+                start_quiz: 'Ready to challenge?',
+                quiz_hint: 'System generates questions based on your notes',
+                start: 'Start',
+                confirm: 'Confirm',
+                correct: 'Correct!',
+                next: 'Next',
+                verb_conj: 'Conjugation',
+                conj_desc: 'Practice verb tenses',
+                daily_phrases: 'Daily Phrases',
+                phrases_desc: 'High-frequency conversations',
+                phonetics: 'Phonetics',
+                phonetics_desc: 'Nasal vowels & liaison',
+                select_extension: 'Select a module',
+                context: 'Context',
+                ai_extensions: 'AI Extensions',
+                delete: 'Delete',
+                close: 'Close',
+                example: 'Example',
+                synonym: 'Synonyms',
+                antonym: 'Antonyms',
+                usage: 'Usage Tips'
+            },
+            fr: {
+                stats_title: 'Statistiques',
+                notes_count: 'Notes',
+                vocabulary: 'Vocabulaire',
+                categories: 'Catégories',
+                all_notes: 'Toutes les notes',
+                grammar: 'Grammaire',
+                vocabulary_cat: 'Vocabulaire',
+                culture: 'Culture',
+                expression: 'Expressions',
+                data_management: 'Données',
+                export: 'Exporter',
+                import: 'Importer',
+                new_note: 'Nouvelle Note',
+                french_content: 'Contenu Français',
+                translation: 'Traduction',
+                notes_context: 'Contexte / Notes',
+                add_tag: 'Ajouter Tag',
+                save: 'Sauvegarder',
+                library: 'Bibliothèque',
+                review_mode: 'Révision',
+                extensions: 'Extensions',
+                recent_notes: 'Notes Récentes',
+                question_mode: 'Mode Question',
+                start_quiz: 'Prêt à relever le défi ?',
+                quiz_hint: 'Le système génère des questions basées sur vos notes',
+                start: 'Commencer',
+                confirm: 'Confirmer',
+                correct: 'Correct !',
+                next: 'Suivant',
+                verb_conj: 'Conjugaison',
+                conj_desc: 'Pratiquer les temps verbaux',
+                daily_phrases: 'Phrases Quotidiennes',
+                phrases_desc: 'Conversations fréquentes',
+                phonetics: 'Phonétique',
+                phonetics_desc: 'Voyelles nasales & liaison',
+                select_extension: 'Sélectionnez un module',
+                context: 'Contexte',
+                ai_extensions: 'Extensions IA',
+                delete: 'Supprimer',
+                close: 'Fermer',
+                example: 'Exemple',
+                synonym: 'Synonymes',
+                antonym: 'Antonymes',
+                usage: 'Conseils d\'usage'
+            }
+        };
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            renderNotes();
+            updateStats();
+            
+            // Load sample data if empty
+            if (notes.length === 0) {
+                loadSampleData();
+            }
+        });
+
+        function switchLanguage(lang) {
+            currentLanguage = lang;
+            
+            // Update buttons
+            document.querySelectorAll('.language-btn').forEach(btn => {
+                btn.classList.remove('active');
+                btn.classList.add('text-gray-600');
+            });
+            document.getElementById(`btn-${lang}`).classList.add('active');
+            document.getElementById(`btn-${lang}`).classList.remove('text-gray-600');
+            
+            // Update text content
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (i18n[lang][key]) {
+                    el.textContent = i18n[lang][key];
+                }
+            });
+            
+            // Update placeholders
+            const placeholders = {
+                'input-french': { zh: 'Entrez votre texte en français...', en: 'Enter French text...', fr: 'Entrez votre texte...' },
+                'input-translation': { zh: '中文或英文翻译...', en: 'Translation...', fr: 'Traduction...' },
+                'input-context': { zh: '添加使用场景、语法说明或文化背景...', en: 'Add context, grammar notes...', fr: 'Ajoutez le contexte...' }
+            };
+            
+            Object.keys(placeholders).forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.placeholder = placeholders[id][lang];
+            });
+        }
+
+        function loadSampleData() {
+            const samples = [
+                {
+                    id: Date.now(),
+                    french: "Bonjour, comment allez-vous ?",
+                    translation: "您好，您好吗？ / Hello, how are you?",
+                    context: "正式问候语，用于白天。比'Salut'更礼貌，适合商务或初次见面。",
+                    category: "expression",
+                    tags: ["greeting", "formal"],
+                    date: new Date().toISOString(),
+                    extensions: {
+                        example: "Bonjour Madame, comment allez-vous aujourd'hui ?",
+                        synonym: "Bonjour, comment ça va ? (较随意)",
+                        usage: "注意：allez-vous 使用 vous 形式，表示尊敬。"
+                    }
+                },
+                {
+                    id: Date.now() + 1,
+                    french: "Je voudrais un café, s'il vous plaît.",
+                    translation: "我想要一杯咖啡，谢谢。 / I would like a coffee, please.",
+                    context: "餐厅点单常用语。Je voudrais 比 Je veux (我想要) 更礼貌委婉。",
+                    category: "vocabulary",
+                    tags: ["restaurant", "polite"],
+                    date: new Date().toISOString(),
+                    extensions: {
+                        example: "Je voudrais l'addition, s'il vous plaît.",
+                        synonym: "Puis-je avoir...? (我能有...吗？)",
+                        usage: "S'il vous plaît 是必备礼貌用语，简称 SVP。"
+                    }
+                },
+                {
+                    id: Date.now() + 2,
+                    french: "Le subjonctif présent",
+                    translation: "现在虚拟式 / Present Subjunctive",
+                    context: "用于表达主观意愿、怀疑、必要性等。如：Il faut que je parte (我必须走了)。",
+                    category: "grammar",
+                    tags: ["grammar", "mood"],
+                    date: new Date().toISOString(),
+                    extensions: {
+                        example: "Je doute qu'il vienne. (我怀疑他会来)",
+                        usage: "常见引导词：pour que, bien que, à moins que...",
+                        antonym: "L'indicatif (陈述式 - 表达事实)"
+                    }
+                }
+            ];
+            notes = samples;
+            saveToStorage();
+            renderNotes();
+            updateStats();
+        }
+
+        function saveNote() {
+            const french = document.getElementById('input-french').value.trim();
+            const translation = document.getElementById('input-translation').value.trim();
+            const context = document.getElementById('input-context').value.trim();
+            const category = document.getElementById('note-category').value;
+            
+            if (!french) {
+                alert(currentLanguage === 'zh' ? '请输入法语内容' : currentLanguage === 'en' ? 'Please enter French content' : 'Veuillez entrer le contenu français');
+                return;
+            }
+            
+            // Generate AI-like extensions
+            const extensions = generateExtensions(french, category);
+            
+            const note = {
+                id: Date.now(),
+                french,
+                translation,
+                context,
+                category,
+                tags: [],
+                date: new Date().toISOString(),
+                extensions
+            };
+            
+            notes.unshift(note);
+            saveToStorage();
+            renderNotes();
+            updateStats();
+            
+            // Clear inputs
+            document.getElementById('input-french').value = '';
+            document.getElementById('input-translation').value = '';
+            document.getElementById('input-context').value = '';
+            
+            // Animation feedback
+            const btn = document.querySelector('button[onclick="saveNote()"]');
+            const originalHTML = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-check mr-2"></i> Saved!';
+            btn.classList.add('bg-green-600');
+            setTimeout(() => {
+                btn.innerHTML = originalHTML;
+                btn.classList.remove('bg-green-600');
+            }, 1500);
+        }
+
+        function generateExtensions(french, category) {
+            // Simulated AI generation based on content
+            const extensions = {};
+            
+            if (category === 'vocabulary' || category === 'expression') {
+                extensions.example = `Exemple d'utilisation: "${french}..."`;
+                extensions.synonym = "Recherche de synonymes en cours...";
+                extensions.usage = "Analyse du registre de langue (soutenu/courant/familier)";
+            } else if (category === 'grammar') {
+                extensions.example = `Application: "${french} est utilisé quand..."`;
+                extensions.usage = "Points de vigilance grammaticale";
+            } else {
+                extensions.example = "Contexte culturel français";
+                extensions.usage = "Notes historiques ou culturelles";
+            }
+            
+            return extensions;
+        }
+
+        function renderNotes() {
+            const container = document.getElementById('notes-container');
+            const filtered = currentCategory === 'all' ? notes : notes.filter(n => n.category === currentCategory);
+            
+            container.innerHTML = filtered.map(note => `
+                <div class="note-card glass-panel rounded-xl p-6 cursor-pointer group relative overflow-hidden" onclick="openNote(${note.id})">
+                    <div class="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-french-blue/10 to-french-red/10 rounded-bl-full -mr-10 -mt-10 transition-transform group-hover:scale-150"></div>
+                    
+                    <div class="flex justify-between items-start mb-3">
+                        <span class="px-2 py-1 rounded-md text-xs font-medium ${getCategoryColor(note.category)}">
+                            ${getCategoryName(note.category)}
+                        </span>
+                        <span class="text-xs text-gray-400">${formatDate(note.date)}</span>
+                    </div>
+                    
+                    <h3 class="text-xl font-serif font-bold text-gray-800 mb-2 line-clamp-2 group-hover:text-french-blue transition-colors">${note.french}</h3>
+                    <p class="text-sm text-gray-600 line-clamp-2 mb-3">${note.translation}</p>
+                    
+                    <div class="flex items-center justify-between mt-4">
+                        <div class="flex space-x-2">
+                            ${note.tags.map(tag => `<span class="text-xs px-2 py-1 bg-gray-100 rounded-full text-gray-600">#${tag}</span>`).join('')}
+                        </div>
+                        <i class="fas fa-chevron-right text-gray-300 group-hover:text-french-blue transition-colors"></i>
+                    </div>
+                </div>
+            `).join('');
+            
+            // Update counts
+            document.getElementById('count-all').textContent = notes.length;
+            document.getElementById('count-grammar').textContent = notes.filter(n => n.category === 'grammar').length;
+            document.getElementById('count-vocabulary').textContent = notes.filter(n => n.category === 'vocabulary').length;
+            document.getElementById('count-culture').textContent = notes.filter(n => n.category === 'culture').length;
+        }
+
+        function getCategoryColor(cat) {
+            const colors = {
+                grammar: 'bg-purple-100 text-purple-700',
+                vocabulary: 'bg-blue-100 text-blue-700',
+                culture: 'bg-orange-100 text-orange-700',
+                expression: 'bg-green-100 text-green-700'
+            };
+            return colors[cat] || 'bg-gray-100 text-gray-700';
+        }
+
+        function getCategoryName(cat) {
+            const names = {
+                grammar: currentLanguage === 'zh' ? '语法' : currentLanguage === 'en' ? 'Grammar' : 'Grammaire',
+                vocabulary: currentLanguage === 'zh' ? '词汇' : currentLanguage === 'en' ? 'Vocabulary' : 'Vocabulaire',
+                culture: currentLanguage === 'zh' ? '文化' : currentLanguage === 'en' ? 'Culture' : 'Culture',
+                expression: currentLanguage === 'zh' ? '表达' : currentLanguage === 'en' ? 'Expression' : 'Expression'
+            };
+            return names[cat] || cat;
+        }
+
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString(currentLanguage === 'zh' ? 'zh-CN' : currentLanguage === 'en' ? 'en-US' : 'fr-FR');
+        }
+
+        function filterCategory(cat) {
+            currentCategory = cat;
+            
+            // Update UI
+            document.querySelectorAll('aside nav button').forEach(btn => {
+                btn.classList.remove('bg-french-blue/10', 'text-french-blue');
+                btn.classList.add('text-gray-600', 'hover:bg-gray-100');
+            });
+            event.target.closest('button').classList.remove('text-gray-600', 'hover:bg-gray-100');
+            event.target.closest('button').classList.add('bg-french-blue/10', 'text-french-blue');
+            
+            renderNotes();
+        }
+
+        function openNote(id) {
+            const note = notes.find(n => n.id === id);
+            if (!note) return;
+            
+            currentNoteId = id;
+            document.getElementById('modal-french').textContent = note.french;
+            document.getElementById('modal-translation').textContent = note.translation;
+            document.getElementById('modal-context').textContent = note.context || 'No context provided';
+            document.getElementById('modal-category').textContent = getCategoryName(note.category);
+            
+            // Render extensions
+            const extContainer = document.getElementById('modal-extensions');
+            const extLabels = {
+                example: i18n[currentLanguage].example,
+                synonym: i18n[currentLanguage].synonym,
+                antonym: i18n[currentLanguage].antonym,
+                usage: i18n[currentLanguage].usage
+            };
+            
+            extContainer.innerHTML = Object.entries(note.extensions || {}).map(([key, value]) => `
+                <div class="bg-gradient-to-r from-gray-50 to-white p-4 rounded-xl border border-gray-100">
+                    <h5 class="font-bold text-french-blue text-sm mb-1 uppercase tracking-wider">${extLabels[key] || key}</h5>
+                    <p class="text-gray-700 text-sm">${value}</p>
+                </div>
+            `).join('');
+            
+            document.getElementById('detail-modal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('detail-modal').classList.add('hidden');
+            currentNoteId = null;
+        }
+
+        function deleteCurrentNote() {
+            if (!currentNoteId) return;
+            if (confirm(currentLanguage === 'zh' ? '确定删除这条笔记吗？' : 'Delete this note?')) {
+                notes = notes.filter(n => n.id !== currentNoteId);
+                saveToStorage();
+                renderNotes();
+                updateStats();
+                closeModal();
+            }
+        }
+
+        function switchTab(tab) {
+            // Hide all views
+            ['library', 'review', 'extension'].forEach(t => {
+                document.getElementById(`view-${t}`).classList.add('hidden');
+                document.getElementById(`tab-${t}`).classList.remove('tab-active');
+                document.getElementById(`tab-${t}`).classList.add('text-gray-500');
+            });
+            
+            // Show selected
+            document.getElementById(`view-${tab}`).classList.remove('hidden');
+            document.getElementById(`tab-${tab}`).classList.add('tab-active');
+            document.getElementById(`tab-${tab}`).classList.remove('text-gray-500');
+        }
+
+        // Quiz System
+        function startQuiz() {
+            if (notes.length < 3) {
+                alert(currentLanguage === 'zh' ? '请至少添加3条笔记才能开始测验' : 'Add at least 3 notes to start quiz');
+                return;
+            }
+            
+            document.getElementById('start-quiz-btn').classList.add('hidden');
+            document.getElementById('quiz-result').classList.add('hidden');
+            nextQuestion();
+        }
+
+        function nextQuestion() {
+            // Select random note
+            const note = notes[Math.floor(Math.random() * notes.length)];
+            const questionType = Math.random() > 0.5 ? 'translation' : 'context';
+            
+            let question, answer, options;
+            
+            if (questionType === 'translation') {
+                question = currentLanguage === 'zh' ? `"${note.french}" 是什么意思？` : 
+                          currentLanguage === 'en' ? `What does "${note.french}" mean?` :
+                          `Que signifie "${note.french}" ?`;
+                answer = note.translation;
+                
+                // Generate wrong options
+                const wrongOptions = notes
+                    .filter(n => n.id !== note.id)
+                    .sort(() => 0.5 - Math.random())
+                    .slice(0, 3)
+                    .map(n => n.translation);
+                
+                options = [answer, ...wrongOptions].sort(() => 0.5 - Math.random());
+            } else {
+                question = currentLanguage === 'zh' ? `以下哪句法语表达了："${note.translation}"？` :
+                          currentLanguage === 'en' ? `Which French phrase means: "${note.translation}"?` :
+                          `Quelle phrase française signifie : "${note.translation}" ?`;
+                answer = note.french;
+                
+                const wrongOptions = notes
+                    .filter(n => n.id !== note.id)
+                    .sort(() => 0.5 - Math.random())
+                    .slice(0, 3)
+                    .map(n => n.french);
+                
+                options = [answer, ...wrongOptions].sort(() => 0.5 - Math.random());
+            }
+            
+            currentQuiz = { answer, note };
+            
+            document.getElementById('quiz-question').textContent = question;
+            document.getElementById('quiz-hint').textContent = currentLanguage === 'zh' ? '选择正确答案' : 'Select the correct answer';
+            
+            const optionsContainer = document.getElementById('quiz-options');
+            optionsContainer.innerHTML = options.map((opt, idx) => `
+                <button onclick="selectQuizOption('${opt.replace(/'/g, "\\'")}', this)" 
+                        class="w-full text-left p-4 rounded-xl border-2 border-gray-200 hover:border-french-blue hover:bg-blue-50 transition-all text-lg font-medium">
+                    ${String.fromCharCode(65 + idx)}. ${opt}
+                </button>
+            `).join('');
+            
+            optionsContainer.classList.remove('hidden');
+            document.getElementById('quiz-result').classList.add('hidden');
+        }
+
+        function selectQuizOption(selected, btnElement) {
+            const correct = selected === currentQuiz.answer;
+            const buttons = document.querySelectorAll('#quiz-options button');
+            
+            buttons.forEach(btn => {
+                btn.disabled = true;
+                if (btn.textContent.includes(currentQuiz.answer)) {
+                    btn.classList.add('bg-green-100', 'border-green-500', 'text-green-800');
+                } else if (btn === btnElement && !correct) {
+                    btn.classList.add('bg-red-100', 'border-red-500', 'text-red-800');
+                }
+            });
+            
+            setTimeout(() => {
+                document.getElementById('quiz-options').classList.add('hidden');
+                const resultDiv = document.getElementById('quiz-result');
+                resultDiv.classList.remove('hidden');
+                
+                if (correct) {
+                    resultDiv.querySelector('i').className = 'fas fa-check-circle text-4xl text-green-500 mb-2';
+                    resultDiv.querySelector('p').textContent = i18n[currentLanguage].correct;
+                    resultDiv.className = 'mt-6 p-6 rounded-xl bg-green-50 border border-green-200 animate-fade-in';
+                } else {
+                    resultDiv.querySelector('i').className = 'fas fa-times-circle text-4xl text-red-500 mb-2';
+                    resultDiv.querySelector('p').textContent = currentLanguage === 'zh' ? '不正确，再试一次' : 'Incorrect, try again';
+                    resultDiv.className = 'mt-6 p-6 rounded-xl bg-red-50 border border-red-200 animate-fade-in';
+                }
+                
+                document.getElementById('quiz-explanation').innerHTML = `
+                    <strong>${currentQuiz.note.french}</strong><br>
+                    ${currentQuiz.note.translation}<br>
+                    <span class="text-sm text-gray-500 mt-2 block">${currentQuiz.note.context}</span>
+                `;
+            }, 500);
+        }
+
+        // Extension Modules
+        function loadExtension(type) {
+            const container = document.getElementById('extension-content');
+            let content = '';
+            
+            if (type === 'conjugation') {
+                content = `
+                    <div class="space-y-6">
+                        <h3 class="text-2xl font-serif font-bold text-french-blue">Le Present de l'indicatif</h3>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                            ${['Parler', 'Finir', 'Vendre', 'Prendre'].map(verb => `
+                                <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow cursor-pointer" onclick="showConjugation('${verb}')">
+                                    <h4 class="font-bold text-lg text-center text-gray-800">${verb}</h4>
+                                    <p class="text-center text-xs text-gray-500 mt-1">Click to conjugate</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                        <div id="conj-display" class="mt-6 p-6 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl hidden">
+                            <!-- Conjugation table injected here -->
+                        </div>
+                    </div>
+                `;
+            } else if (type === 'phrases') {
+                content = `
+                    <div class="space-y-4">
+                        <h3 class="text-2xl font-serif font-bold text-orange-600">Phrases essentielles</h3>
+                        <div class="space-y-3">
+                            ${[
+                                {fr: "Excusez-moi, où est...?", zh: "打扰一下，...在哪里？", context: "问路"},
+                                {fr: "Je ne comprends pas", zh: "我不明白", context: "表示困惑"},
+                                {fr: "Pouvez-vous répéter?", zh: "您能重复一遍吗？", context: "请求重复"},
+                                {fr: "L'addition, s'il vous plaît", zh: "请结账", context: "餐厅"}
+                            ].map((phrase, idx) => `
+                                <div class="flex items-center justify-between p-4 bg-white rounded-xl border border-gray-100 hover:border-orange-200 transition-colors group">
+                                    <div class="flex-1">
+                                        <p class="font-serif text-lg font-medium text-gray-800 group-hover:text-orange-600 transition-colors">${phrase.fr}</p>
+                                        <p class="text-sm text-gray-600">${phrase.zh}</p>
+                                        <span class="text-xs text-orange-400 mt-1 inline-block">${phrase.context}</span>
+                                    </div>
+                                    <button class="w-10 h-10 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center hover:bg-orange-200 transition-colors" onclick="speak('${phrase.fr}')">
+                                        <i class="fas fa-volume-up"></i>
+                                    </button>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            } else if (type === 'phonetics') {
+                content = `
+                    <div class="space-y-6">
+                        <h3 class="text-2xl font-serif font-bold text-teal-600">Voyelles nasales</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            ${[
+                                {sound: '/ɑ̃/', example: 'dans, blanc, temps', desc: '鼻化央元音'},
+                                {sound: '/ɔ̃/', example: 'bon, maison, prénom', desc: '后鼻元音'},
+                                {sound: '/ɛ̃/', example: 'vin, pain, demain', desc: '前鼻元音'}
+                            ].map(item => `
+                                <div class="bg-white p-6 rounded-xl border border-gray-100 text-center hover:shadow-lg transition-all cursor-pointer" onclick="speak('${item.example.split(',')[0]}')">
+                                    <div class="text-4xl font-serif font-bold text-teal-600 mb-2">${item.sound}</div>
+                                    <p class="text-sm text-gray-600 mb-2">${item.example}</p>
+                                    <p class="text-xs text-gray-400">${item.desc}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+            
+            container.innerHTML = content;
+        }
+
+        function showConjugation(verb) {
+            const display = document.getElementById('conj-display');
+            const conjugations = {
+                'Parler': ['je parle', 'tu parles', 'il/elle parle', 'nous parlons', 'vous parlez', 'ils/elles parlent'],
+                'Finir': ['je finis', 'tu finis', 'il/elle finit', 'nous finissons', 'vous finissez', 'ils/elles finissent'],
+                'Vendre': ['je vends', 'tu vends', 'il/elle vend', 'nous vendons', 'vous vendez', 'ils/elles vendent'],
+                'Prendre': ['je prends', 'tu prends', 'il/elle prend', 'nous prenons', 'vous prenez', 'ils/elles prennent']
+            };
+            
+            const subjects = ['Je', 'Tu', 'Il/Elle', 'Nous', 'Vous', 'Ils/Elles'];
+            
+            display.innerHTML = `
+                <h4 class="text-xl font-bold mb-4 text-indigo-900">${verb}</h4>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                    ${conjugations[verb].map((form, idx) => `
+                        <div class="bg-white/80 p-3 rounded-lg flex justify-between items-center">
+                            <span class="font-medium text-indigo-600">${subjects[idx]}</span>
+                            <span class="font-serif text-lg">${form.split(' ')[1] || form}</span>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+            display.classList.remove('hidden');
+        }
+
+        function speak(text) {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'fr-FR';
+                utterance.rate = 0.8;
+                speechSynthesis.speak(utterance);
+            }
+        }
+
+        // Data Persistence
+        function saveToStorage() {
+            localStorage.setItem('frenchNotes', JSON.stringify(notes));
+        }
+
+        function updateStats() {
+            document.getElementById('total-notes').textContent = notes.length;
+        }
+
+        function exportData() {
+            const dataStr = JSON.stringify(notes, null, 2);
+            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+            const url = URL.createObjectURL(dataBlob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `french-notes-${new Date().toISOString().split('T')[0]}.json`;
+            link.click();
+        }
+
+        function importData(input) {
+            const file = input.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                try {
+                    const imported = JSON.parse(e.target.result);
+                    if (Array.isArray(imported)) {
+                        notes = [...imported, ...notes];
+                        saveToStorage();
+                        renderNotes();
+                        updateStats();
+                        alert(currentLanguage === 'zh' ? '导入成功！' : 'Import successful!');
+                    }
+                } catch (err) {
+                    alert(currentLanguage === 'zh' ? '文件格式错误' : 'Invalid file format');
+                }
+            };
+            reader.readAsText(file);
+            input.value = '';
+        }
+
+        function searchNotes() {
+            const query = document.getElementById('search-input').value.toLowerCase();
+            const cards = document.querySelectorAll('.note-card');
+            
+            cards.forEach(card => {
+                const text = card.innerText.toLowerCase();
+                card.style.display = text.includes(query) ? 'block' : 'none';
+            });
+        }
+
+        function addTag() {
+            const tag = prompt(currentLanguage === 'zh' ? '输入标签名:' : 'Enter tag name:');
+            if (tag) {
+                const container = document.getElementById('tags-container');
+                const span = document.createElement('span');
+                span.className = 'text-xs px-2 py-1 bg-french-blue/10 text-french-blue rounded-full';
+                span.textContent = `#${tag}`;
+                container.appendChild(span);
+            }
+        }
+
+        // Close modal on escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+    </script>
+</body>
+</html>
